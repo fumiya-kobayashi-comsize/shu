@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class UserDAO {
 	public boolean existsUser(String userId, String password) throws SQLException, ClassNotFoundException {
-		String sql = "SELECT * FROM test.m_user WHERE user_id = ? and password = ?;";
+		String sql = "SELECT * FROM task_db.m_user WHERE user_id = ? and password = ?;";
 		boolean isUserExists = false;
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -25,7 +25,7 @@ public class UserDAO {
 	}
 
 	public String getUserName(String userId, String password) throws SQLException, ClassNotFoundException {
-	    String sql = "SELECT user_name FROM test.m_user WHERE user_id = ? and password = ?;";
+	    String sql = "SELECT user_name FROM task_db.m_user WHERE user_id = ? and password = ?;";
 	    try (Connection con = ConnectionManager.getConnection();
 	            PreparedStatement pstmt = con.prepareStatement(sql);) {
 

@@ -11,7 +11,7 @@
 	<hr>
 	<% String userName = (String) session.getAttribute("userName"); %>
 	<h2>
-		ようこそ！<%=userName %>さん
+		担当者：<%=userName %>
 	</h2><br>
 	<div class="button-container">
 		<form action="" method="GET">

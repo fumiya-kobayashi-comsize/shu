@@ -63,6 +63,7 @@ public class LoginServlet extends HttpServlet {
 
 		if (isUserExists) {
 			session.setAttribute("userName", userName);
+			session.setAttribute("userId", userId);
 			url = "menu.jsp";
 		} else {
 			url = "login-failure.jsp";
