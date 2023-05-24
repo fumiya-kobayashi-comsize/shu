@@ -25,19 +25,26 @@ public class UserDAO {
 	}
 
 	public String getUserName(String userId, String password) throws SQLException, ClassNotFoundException {
-	    String sql = "SELECT user_name FROM task_db.m_user WHERE user_id = ? and password = ?;";
-	    try (Connection con = ConnectionManager.getConnection();
-	            PreparedStatement pstmt = con.prepareStatement(sql);) {
 
-	        pstmt.setString(1, userId);
-	        pstmt.setString(2, password);
 
-	        ResultSet res = pstmt.executeQuery();
+		String sql = "SELECT * from task_db.m_user WHERE user_id = ? AND password = ?;";
+		String userName = null;
 
-	        if (res.next()) {
-	            return res.getString("user_name");
-	        }
-	        return null;
-	    }
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+
+			pstmt.setString(1, userId);
+			pstmt.setString(2, password);
+
+			ResultSet res = pstmt.executeQuery();
+
+			while(res.next()) {
+				userName = res.getString("user_name");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return userName;
 	}
 }

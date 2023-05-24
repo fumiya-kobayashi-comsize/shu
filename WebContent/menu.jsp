@@ -20,7 +20,7 @@
 		<form action="" method="POST">
 			<input type="submit" value="タスク一覧表示">
 		</form>
-		<form action="login.jsp" method="POST">
+		<form action="logout.jsp" method="POST">
 			<input type="submit" value="ログアウト">
 		</form>
 	</div>
