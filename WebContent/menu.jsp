@@ -9,17 +9,14 @@
 <body>
 	<h1>メニュー</h1>
 	<hr>
-	<% String userId = (String) session.getAttribute("userId"); %>
-	<div class="button-container">
 		<form action="task-register.jsp" method="GET">
 			<input type="submit" value="タスク登録">
 		</form>
-		<form action="TaskListServlet" method="POST">
+		<form action="task-list-servlet" method="POST">
 			<input type="submit" value="タスク一覧表示">
 		</form>
 		<form action="logout.jsp" method="POST">
 			<input type="submit" value="ログアウト">
 		</form>
-	</div>
 </body>
 </html>

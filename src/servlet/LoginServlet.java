@@ -61,11 +61,10 @@ public class LoginServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		// セッションスコープへの属性の設定
-		session.setAttribute("userId", userId);
-
 		// リクエストの転送
 		if(isExistUser) {
+			// セッションスコープへの属性の設定
+			session.setAttribute("userId", userId);
 			RequestDispatcher rd = request.getRequestDispatcher("menu.jsp"); // メニュー画面
 			rd.forward(request, response);
 		} else {

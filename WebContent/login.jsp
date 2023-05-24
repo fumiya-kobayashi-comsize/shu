@@ -11,7 +11,7 @@
 	<hr>
 	<h2>ユーザIDとパスワードを入力してください</h2>
 	<div>
-	<form action="LoginServlet" method="POST">
+	<form action="login-servlet" method="POST">
 		<table>
 			<tr>
 				<th>ユーザID</th>
