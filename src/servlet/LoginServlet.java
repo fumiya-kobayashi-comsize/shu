@@ -42,32 +42,34 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+
+		// セッションオブジェクトを生成
+		HttpSession session = request.getSession();
+		// 入力されたユーザIDとパスワードを取得する
 		String userId = request.getParameter("user_id");
 		String password = request.getParameter("password");
 
-		String userName = "";
 		boolean isExistUser = false;
 
 		// DAOの生成
 		UserDAO dao = new UserDAO();
 
 		try {
-			userName = dao.getUserName(userId,password);
+			// 入力されたユーザIDとパスワードでログイン認証する
 			isExistUser = dao.existsUser(userId,password);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
-		request.setAttribute("userName", userName);
+		// セッションスコープへの属性の設定
+		session.setAttribute("userId", userId);
 
-		HttpSession session = request.getSession();
-		session.setAttribute("userName", userName);
-
+		// リクエストの転送
 		if(isExistUser) {
-			RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("menu.jsp"); // メニュー画面
 			rd.forward(request, response);
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("login-failure.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("login-failure.jsp"); // ログイン失敗画面
 			rd.forward(request, response);
 		}
 	}

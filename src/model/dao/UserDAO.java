@@ -6,17 +6,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO {
-	public boolean existsUser(String userId, String password) throws SQLException, ClassNotFoundException {
+	public boolean existsUser(String userId, String password)
+			throws SQLException, ClassNotFoundException {
+
 		String sql = "SELECT * FROM task_db.m_user WHERE user_id = ? and password = ?;";
 		boolean isUserExists = false;
+
+		// データベースへの接続の取得、Statementの取得
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);) {
 
+			// プレースホルダへの値の設定
 			pstmt.setString(1, userId);
 			pstmt.setString(2, password);
 
+			// SQLステートメントの実行
 			ResultSet res = pstmt.executeQuery();
 
+			// 結果の操作
 			if (res.next()) {
 				isUserExists = true;
 			}
@@ -24,27 +31,4 @@ public class UserDAO {
 		}
 	}
 
-	public String getUserName(String userId, String password) throws SQLException, ClassNotFoundException {
-
-
-		String sql = "SELECT * from task_db.m_user WHERE user_id = ? AND password = ?;";
-		String userName = null;
-
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);) {
-
-			pstmt.setString(1, userId);
-			pstmt.setString(2, password);
-
-			ResultSet res = pstmt.executeQuery();
-
-			while(res.next()) {
-				userName = res.getString("user_name");
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return userName;
-	}
 }
