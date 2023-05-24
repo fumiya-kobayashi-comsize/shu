@@ -16,7 +16,7 @@ import model.dao.UserDAO;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
+@WebServlet("/login-servlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -50,6 +50,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		boolean isExistUser = false;
+		String userName = null;
 
 		// DAOの生成
 		UserDAO dao = new UserDAO();
@@ -57,6 +58,8 @@ public class LoginServlet extends HttpServlet {
 		try {
 			// 入力されたユーザIDとパスワードでログイン認証する
 			isExistUser = dao.existsUser(userId,password);
+			// ログインしたユーザ名を取得する
+			userName = dao.getUserName(userId,password);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -65,6 +68,7 @@ public class LoginServlet extends HttpServlet {
 		if(isExistUser) {
 			// セッションスコープへの属性の設定
 			session.setAttribute("userId", userId);
+			session.setAttribute("userName", userName);
 			RequestDispatcher rd = request.getRequestDispatcher("menu.jsp"); // メニュー画面
 			rd.forward(request, response);
 		} else {

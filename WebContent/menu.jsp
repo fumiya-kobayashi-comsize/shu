@@ -9,14 +9,14 @@
 <body>
 	<h1>メニュー</h1>
 	<hr>
-		<form action="task-add-servlet" method="GET">
-			<input type="submit" value="タスク登録">
-		</form>
-		<form action="task-list-servlet" method="POST">
-			<input type="submit" value="タスク一覧表示">
-		</form>
-		<form action="logout.jsp" method="POST">
-			<input type="submit" value="ログアウト">
-		</form>
+	<form action="task-add-servlet" method="GET">
+		<input type="submit" value="タスク登録">
+	</form>
+	<form action="task-list-servlet" method="POST">
+		<input type="submit" value="タスク一覧表示">
+	</form>
+	<form action="logout.jsp" method="POST">
+		<input type="submit" value="ログアウト">
+	</form>
 </body>
 </html>

@@ -25,10 +25,8 @@
 			</tr>
 		</table>
 		<br>
-		<div class="button-container">
 		<input type="submit" value="ログイン">
 		<input type="reset" value="取消">
-		</div>
 	</form>
 	</div>
 </body>
