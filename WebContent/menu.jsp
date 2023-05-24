@@ -10,17 +10,14 @@
 	<h1>メニュー</h1>
 	<hr>
 	<% String userName = (String) session.getAttribute("userName"); %>
-	<h2>
-		担当者：<%=userName %>
-	</h2><br>
 	<div class="button-container">
-		<form action="" method="GET">
+		<form action="task-register.jsp" method="GET">
 			<input type="submit" value="タスク登録">
 		</form>
-		<form action="" method="POST">
+		<form action="TaskShowServlet" method="POST">
 			<input type="submit" value="タスク一覧表示">
 		</form>
-		<form action="login.jsp" method="POST">
+		<form action="logout.jsp" method="POST">
 			<input type="submit" value="ログアウト">
 		</form>
 	</div>

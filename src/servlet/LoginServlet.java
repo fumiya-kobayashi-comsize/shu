@@ -42,35 +42,33 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		String userId = request.getParameter("user_id");
+		String password = request.getParameter("password");
 
+		String userName = "";
+		boolean isExistUser = false;
+
+		// DAOの生成
 		UserDAO dao = new UserDAO();
 
-		HttpSession session = request.getSession();
-
-		String userId = (String) request.getParameter("user_id");
-		String password = (String) request.getParameter("password");
-
-		boolean isUserExists = false;
-		String userName = "";
 		try {
-			isUserExists = dao.existsUser(userId, password);
-			userName = dao.getUserName(userId, password);
+			userName = dao.getUserName(userId,password);
+			isExistUser = dao.existsUser(userId,password);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
-		String url = "";
+		request.setAttribute("userName", userName);
 
-		if (isUserExists) {
-			session.setAttribute("userName", userName);
-			session.setAttribute("userId", userId);
-			url = "menu.jsp";
+		HttpSession session = request.getSession();
+		session.setAttribute("userName", userName);
+
+		if(isExistUser) {
+			RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+			rd.forward(request, response);
 		} else {
-			url = "login-failure.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher("login-failure.jsp");
+			rd.forward(request, response);
 		}
-
-		RequestDispatcher rd = request.getRequestDispatcher(url);
-		rd.forward(request, response);
 	}
-
 }
