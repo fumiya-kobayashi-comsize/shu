@@ -9,7 +9,7 @@
 <body>
 	<h1>メニュー</h1>
 	<hr>
-		<form action="task-register.jsp" method="GET">
+		<form action="task-add-servlet" method="GET">
 			<input type="submit" value="タスク登録">
 		</form>
 		<form action="task-list-servlet" method="POST">
