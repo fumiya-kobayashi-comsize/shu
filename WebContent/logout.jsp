@@ -10,7 +10,6 @@
 	<% String userName = (String) session.getAttribute("userName"); %>
 	<h1>ログアウト</h1>
 	<hr>
-	<h2>担当者：<%=userName %></h2>
 	<h1>ログアウトしました</h1>
 	<%session.invalidate(); %>
 	<form action="login.jsp" method="POST">
