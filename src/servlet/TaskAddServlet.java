@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -71,18 +72,26 @@ public class TaskAddServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		boolean doInsert = true;
 		int count = 0;
-		int taskId = Integer.parseInt(request.getParameter("taskId"));
 		String taskName = request.getParameter("taskName");
 		int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-		String limitDate = request.getParameter("limitDate");
-		//String userId = request.getParameter("userId");
+		String limitDateStr = request.getParameter("limitDate");
+		Date limitDate = null;
+		if (!"".equals(limitDateStr)) {
+			try {
+				limitDate = Date.valueOf(limitDateStr);
+			} catch (IllegalArgumentException e) {
+				doInsert = false;
+			}
+		}else {
+
+		}
+
 		String statusCode = request.getParameter("statusCode");
 		String memo = request.getParameter("memo");
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
 
 		TaskBean tb = new TaskBean();
-		tb.setTaskId(taskId);
 		tb.setTaskName(taskName);
 		tb.setCategoryId(categoryId);
 		tb.setLimitDate(limitDate);

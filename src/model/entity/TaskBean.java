@@ -1,12 +1,14 @@
 package model.entity;
 
+import java.sql.Date;
+
 public class TaskBean {
 
 	/*	タスクテーブル t_task のBean*/
 	private int taskId;
 	private String taskName;
 	private int categoryId;
-	private String limitDate;
+	private Date limitDate;
 	private String userId;
 	private String statusCode;
 	private String memo;
@@ -35,11 +37,12 @@ public class TaskBean {
 		this.categoryId = categoryId;
 	}
 
-	public String getLimitDate() {
+
+	public Date getLimitDate() {
 		return limitDate;
 	}
 
-	public void setLimitDate(String limitDate) {
+	public void setLimitDate(Date limitDate) {
 		this.limitDate = limitDate;
 	}
 

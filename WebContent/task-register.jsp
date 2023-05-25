@@ -16,13 +16,14 @@
 	タスク名:<input type = "text" name = "taskName" ><br>
 
 
+
 	カテゴリ情報:<select name = "categoryId">
 				<% for (CategoryBean category : categoryList) { %>
 					<option value="<%=category.getCategoryId()%>"><%=category.getCategoryName()%></option>
     			<% } %>
 				</select><br>
 
-	期限:<input type = "date" name = "limitDate"><br>
+	期限:<input type="text" name="limitDate" placeholder="YYYY-MM-DD"><br>
 	<%String userId = (String) session.getAttribute("userId"); %>
 	担当者情報:<%=userId %><br>
 
