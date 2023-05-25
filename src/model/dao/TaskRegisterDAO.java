@@ -15,8 +15,8 @@ import model.entity.TaskBean;
 public class TaskRegisterDAO {
 	public int insertTask(TaskBean tb) throws SQLException, ClassNotFoundException {
 		int count = 0;
-		String sql = "INSERT INTO task_db.t_task (task_name, category_id, limit_date, user_id, status_code) "
-				+ "VALUE (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO task_db.t_task (task_name, category_id, limit_date, user_id, status_code, memo) "
+				+ "VALUE (?, ?, ?, ?, ?, ?)";
 
 		try (Connection connection = ConnectionManager.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -26,6 +26,7 @@ public class TaskRegisterDAO {
 			pstmt.setDate(3, tb.getLimitDate());
 			pstmt.setString(4, tb.getUserId());
 			pstmt.setString(5, tb.getStatusCode());
+			pstmt.setString(6, tb.getMemo());
 
 			// SQLを実行したレコード件数が入っている
 			count = pstmt.executeUpdate();

@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -19,22 +20,26 @@ import model.entity.StatusBean;
 import model.entity.TaskBean;
 
 /**
- * Servlet implementation class TaskAddServlet
+ * タスク追加のServletクラスです。
  */
 @WebServlet("/task-add-servlet")
 public class TaskAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * コンストラクタ
 	 */
 	public TaskAddServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * GETリクエストを処理し、タスク登録ページに遷移します。
+	 *
+	 * @param request  HTTPリクエスト
+	 * @param response HTTPレスポンス
+	 * @throws ServletException サーブレット例外
+	 * @throws IOException      入出力例外
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -61,36 +66,54 @@ public class TaskAddServlet extends HttpServlet {
 		// リクエストの転送
 		RequestDispatcher rd = request.getRequestDispatcher("task-register.jsp");
 		rd.forward(request, response);
-
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * POSTリクエストを処理し、タスクの登録を行います。
+	 *
+	 * @param request  HTTPリクエスト
+	 * @param response HTTPレスポンス
+	 * @throws ServletException サーブレット例外
+	 * @throws IOException      入出力例外
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// UTF-8の書式でコードを受け取る
 		request.setCharacterEncoding("UTF-8");
+		// boolean型で振り分けをする為記載
 		boolean doInsert = true;
+		// DAOからcountを受け取るためcount変数記載
 		int count = 0;
+		// jspからのパラメータ名受け取るための変数たち
 		String taskName = request.getParameter("taskName");
 		int categoryId = Integer.parseInt(request.getParameter("categoryId"));
 		String limitDateStr = request.getParameter("limitDate");
 		Date limitDate = null;
+
+		// 入力された日付が空文字かどうか確認する
 		if (!"".equals(limitDateStr)) {
 			try {
+				// 空文字でなければsql.dateに変換する
 				limitDate = Date.valueOf(limitDateStr);
+
+				// 現在日付を取得する
+				LocalDate currentDate = LocalDate.now();
+				// java.sql.Dateに変換
+				Date currentDateSql = Date.valueOf(currentDate);
+				// 入力された日付が過去日付か確認する
+				if (!currentDateSql.before(limitDate)) {
+					doInsert = false;
+				}
 			} catch (IllegalArgumentException e) {
 				doInsert = false;
 			}
-		}else {
-
 		}
-
+		// jspからパラメーター名を受け取る変数たち
 		String statusCode = request.getParameter("statusCode");
 		String memo = request.getParameter("memo");
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
-
+		// jspから受け取ったパラメータ達をBeanでインスタンス化しtb変数に入れとく
 		TaskBean tb = new TaskBean();
 		tb.setTaskName(taskName);
 		tb.setCategoryId(categoryId);
@@ -99,28 +122,29 @@ public class TaskAddServlet extends HttpServlet {
 		tb.setMemo(memo);
 		tb.setUserId(userId);
 
+		// DAOをインスタンス化
 		TaskRegisterDAO dao = new TaskRegisterDAO();
 
 		try {
+			// booleanがtrueだったら
 			if (doInsert) {
-				// DAOの利用
+				// タスクをデータベースに登録する
 				count = dao.insertTask(tb);
 			}
 
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		// DAOから帰ってきたcountが0だったら
 		if (count == 0) {
-			// リクエストの転送
+			// 登録失敗ページにリダイレクトする
 			RequestDispatcher rd = request.getRequestDispatcher("register-failure.jsp");
 			rd.forward(request, response);
 
 		} else {
-			// リクエストの転送
+			// 登録成功ページにリダイレクトする
 			RequestDispatcher rd = request.getRequestDispatcher("register-success.jsp");
 			rd.forward(request, response);
 		}
-
 	}
-
 }

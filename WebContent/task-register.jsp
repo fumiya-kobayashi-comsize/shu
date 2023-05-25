@@ -13,7 +13,8 @@
 	<hr>
 
 	<form action = "task-add-servlet" method = "POST">
-	タスク名:<input type = "text" name = "taskName" ><br>
+	<label for = "taskName">タスク名:</label>
+	<input type = "text" name = "taskName" id = "taskName"><br>
 
 
 
@@ -25,7 +26,8 @@
 
 	期限:<input type="text" name="limitDate" placeholder="YYYY-MM-DD"><br>
 	<%String userId = (String) session.getAttribute("userId"); %>
-	担当者情報:<%=userId %><br>
+	<%String userName = (String) session.getAttribute("userName"); %>
+	担当者情報:<%=userName %><br>
 
 	ステータス情報:<select name = "statusCode">
 					<% for (StatusBean status : statusList) { %>
