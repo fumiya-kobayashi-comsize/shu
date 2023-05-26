@@ -10,10 +10,10 @@ import java.util.List;
 
 import model.entity.CategoryBean;
 import model.entity.StatusBean;
-import model.entity.TaskBean;
+import model.entity.TaskCategoryStatusBean;
 
 public class TaskRegisterDAO {
-	public int insertTask(TaskBean tb) throws SQLException, ClassNotFoundException {
+	public int insertTask(TaskCategoryStatusBean tbs) throws SQLException, ClassNotFoundException {
 		int count = 0;
 		String sql = "INSERT INTO task_db.t_task (task_name, category_id, limit_date, user_id, status_code, memo) "
 				+ "VALUE (?, ?, ?, ?, ?, ?)";
@@ -21,12 +21,12 @@ public class TaskRegisterDAO {
 		try (Connection connection = ConnectionManager.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			//pstmtでsql実行
-			pstmt.setString(1, tb.getTaskName());
-			pstmt.setInt(2, tb.getCategoryId());
-			pstmt.setDate(3, tb.getLimitDate());
-			pstmt.setString(4, tb.getUserId());
-			pstmt.setString(5, tb.getStatusCode());
-			pstmt.setString(6, tb.getMemo());
+			pstmt.setString(1, tbs.getTaskName());
+			pstmt.setInt(2, tbs.getCategoryId());
+			pstmt.setDate(3, tbs.getLimitDate());
+			pstmt.setString(4, tbs.getUserId());
+			pstmt.setString(5, tbs.getStatusCode());
+			pstmt.setString(6, tbs.getMemo());
 
 			// SQLを実行したレコード件数が入っている
 			count = pstmt.executeUpdate();
