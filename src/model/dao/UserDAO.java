@@ -9,6 +9,13 @@ import model.entity.UserBean;
 
 public class UserDAO {
 
+	/**
+	 * 指定されたIDからユーザの情報を検索して返します。
+	 * @param userId ユーザID
+	 * @return ユーザ情報
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public UserBean getUserData(String userId)
 			throws SQLException, ClassNotFoundException {
 
@@ -32,15 +39,9 @@ public class UserDAO {
 				user.setPassword(res.getString("password"));
 				user.setUserName(res.getString("user_name"));
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return user;
-
 	}
-
-
-
 }
