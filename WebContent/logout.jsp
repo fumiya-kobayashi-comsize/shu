@@ -7,7 +7,6 @@
 <title>ログアウト</title>
 </head>
 <body>
-	<% String userId = (String) session.getAttribute("userId"); %>
 	<h1>ログアウト</h1>
 	<hr>
 	<h1>ログアウトしました</h1>
