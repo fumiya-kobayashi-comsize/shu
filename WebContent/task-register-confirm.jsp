@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="model.entity.TaskCategoryStatusBean"
 	import="java.util.List,model.entity.CategoryBean"
-	import="java.util.List,model.entity.StatusBean"%>
+	import="java.util.List,model.entity.StatusBean"
+	import = "java.util.List,model.entity.UserBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,11 +34,12 @@
 			</tr>
 			<tr>
 				<th>担当者情報</th>
+				<%UserBean user = (UserBean)session.getAttribute("user"); %>
 				<%
-					String userId = (String) session.getAttribute("userId");
+					String userId = user.getUserId();
 				%>
 				<%
-					String userName = (String) session.getAttribute("userName");
+					String userName = user.getUserName();
 				%>
 				<td><%=userName%></td>
 			</tr>
