@@ -13,10 +13,6 @@
 	List<TaskCategoryStatusBean> taskList = (List<TaskCategoryStatusBean>) request.getAttribute("taskList");
 	%>
 
-<!-- 	TaskCategoryStatusBean a = (TaskCategoryStatusBean)session.getAttribute("user");
-	a.getUserId();
-	String shumi = request.getParameter("shumi"); -->
-
 	<table>
 	<tr>
 			<th align="left">タスク名　　　</th>
@@ -31,30 +27,43 @@
 			for (TaskCategoryStatusBean task : taskList) {
 		%>
 		<tr>
+			<td><a
+				href="TaskDeleteConfirmServlet?task_id=<%=task.getTaskId()%>"><%=task.getTaskId()%></a></td>
+
 			<td>
 				<%=task.getTaskName()%>
-				<input type="hidden" name="updatedTask" value="<%=task.getTaskId()%>, <%=task.getTaskName()%>">
 			</td>
 			<td>
 				<%=task.getCategoryName()%>
-				<input type="hidden" name="category" value="<%=task.getCategoryId()%>, <%=task.getCategoryName()%>">
 			</td>
-			<td><%=task.getLimitDate()%></td>
-			<td><%=task.getUserId()%></td>
+			<td>
+				<%=task.getLimitDate()%>
+			</td>
+			<td>
+				<%=task.getUserId()%>
+			</td>
 			<td>
 				<%=task.getStatusName()%>
-				<input type="hidden" name="status" value="<%=task.getStatusCode()%>, <%=task.getStatusName()%>">
 			</td>
-			<td><%=task.getMemo()%></td>
-			<td><form action="task-alter-servlet" method="POST">
-					<input type="submit" value="変更">
-				</form>
 			<td>
-				<form action="task-delete-servlet" method="POST">
-					<input type="submit" value="削除">
+				<%=task.getMemo()%>
+			</td>
+			<td>
+				<form action="task-alter-servlet" method="POST">
+					<input type="submit" value="変更">
+					<input type="hidden" name="updatedTask" value="<%=task.getTaskId()%>, <%=task.getTaskName()%>">
+					<input type="hidden" name="category" value="<%=task.getCategoryId()%>, <%=task.getCategoryName()%>">
+					<input type="hidden" name="status" value="<%=task.getStatusCode()%>, <%=task.getStatusName()%>">
 				</form>
 			</td>
+			<td>
+				<form action="task-delete-confirm.jsp" method="POST">
+					<input type="submit" value="削除確認">
+					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">
+					<input type="hidden" name="taskList" value="<%=request.getAttribute("taskList")%>">
 
+				</form>
+			</td>
 		</tr>
 		<%
 			}
