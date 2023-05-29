@@ -8,17 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import model.entity.UserBean;
 
-/**
- * UserDAOのテストクラスです。
- * テストデータの取得や検証を行います。
- * @author 櫻井藍子
- */
 class UserDAOTest {
 
-	 /**
-     * ユーザのデータを取得するテストケースです。
-     * 正しいユーザIDを指定した場合、正しいデータが返されることを検証します。
-     */
 	@Test
 	void test1GetUserData() {
 		UserDAO userDAO = new UserDAO();
@@ -33,10 +24,6 @@ class UserDAOTest {
 		assertEquals("桑原",user.getUserName());
 	}
 
-	 /**
-     * ユーザのデータを取得するテストケースです。
-     * 存在しないユーザIDを指定した場合、nullが返されることを検証します。
-     */
 	@Test
 	void test2GetUserData() {
 		UserDAO userDAO = new UserDAO();
