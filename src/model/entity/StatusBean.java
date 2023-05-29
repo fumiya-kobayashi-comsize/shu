@@ -1,29 +1,53 @@
 package model.entity;
 
+/**
+ * ステータス情報を表すエンティティクラスです。
+ * @author 吉澤誠和
+ */
 public class StatusBean {
 
-	private String statusCode;
+    private String statusCode; // ステータスコード
+    private String statusName; // ステータス名
 
-	private String statusName;
+    /**
+     * StatusBeanクラスの新しいインスタンスを作成します。
+     */
+    public StatusBean() {
+    }
 
-	public StatusBean() {
+    /**
+     * ステータスコードを取得します。
+     *
+     * @return ステータスコード
+     */
+    public String getStatusCode() {
+        return statusCode;
+    }
 
-	}
+    /**
+     * ステータスコードを設定します。
+     *
+     * @param statusCode ステータスコード
+     */
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
 
-	public String getStatusCode() {
-		return statusCode;
-	}
+    /**
+     * ステータス名を取得します。
+     *
+     * @return ステータス名
+     */
+    public String getStatusName() {
+        return statusName;
+    }
 
-	public void setStatusCode(String statusCode) {
-		this.statusCode = statusCode;
-	}
-
-	public String getStatusName() {
-		return statusName;
-	}
-
-	public void setStatusName(String statusName) {
-		this.statusName = statusName;
-	}
-
+    /**
+     * ステータス名を設定します。
+     *
+     * @param statusName ステータス名
+     */
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
 }

@@ -19,6 +19,7 @@ import model.entity.TaskCategoryStatusBean;
 
 /**
  * タスク追加のServletクラスです。
+ * @author 吉澤誠和
  */
 @WebServlet("/task-add-servlet")
 public class TaskAddServlet extends HttpServlet {

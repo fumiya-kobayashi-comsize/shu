@@ -12,65 +12,85 @@ import model.entity.CategoryBean;
 import model.entity.StatusBean;
 import model.entity.TaskCategoryStatusBean;
 
+/**
+ * タスク登録のためのデータアクセスメソッドを提供するクラスです。
+ * データベースとのやり取りを行い、CRUD操作を実行します。
+ * @author 吉澤誠和
+ */
 public class TaskRegisterDAO {
-						// TaskCategoryStatusBean型を選択
-	public int insertTask(TaskCategoryStatusBean tcs) throws SQLException, ClassNotFoundException {
-		// 最終的にcountで返したいので0を代入
-		int count = 0;
-		// SQL文の作成jspで入力された値をINSERTで新規追加
-		String sql = "INSERT INTO task_db.t_task (task_name, category_id, limit_date, user_id, status_code, memo) "
-				+ "VALUE (?, ?, ?, ?, ?, ?)";
 
-		try (Connection connection = ConnectionManager.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(sql)) {
-			//pstmtでsql実行
-			pstmt.setString(1, tcs.getTaskName());
-			pstmt.setInt(2, tcs.getCategoryId());
-			pstmt.setDate(3, tcs.getLimitDate());
-			pstmt.setString(4, tcs.getUserId());
-			pstmt.setString(5, tcs.getStatusCode());
-			pstmt.setString(6, tcs.getMemo());
+    /**
+     * タスクをデータベースに挿入します。
+     *
+     * @param tcs 挿入するタスクを表すTaskCategoryStatusBeanオブジェクト
+     * @return 影響を受けたレコード数（挿入が成功した場合は通常1）
+     * @throws SQLException            データベースアクセスエラーが発生した場合
+     * @throws ClassNotFoundException データベースドライバクラスが見つからない場合
+     */
+    public int insertTask(TaskCategoryStatusBean tcs) throws SQLException, ClassNotFoundException {
+        int count = 0; // 影響を受けたレコード数（初期値は0）
+        String sql = "INSERT INTO task_db.t_task (task_name, category_id, limit_date, user_id, status_code, memo) "
+                + "VALUES (?, ?, ?, ?, ?, ?)"; // タスクを挿入するためのSQL文
 
-			// SQLを実行したレコード件数が入っている
-			count = pstmt.executeUpdate();
-		}
-		return count;
-	}
-	// テーブルに入っているCategoryを表示させる為のメソッド
-	public List<CategoryBean> selectCategory() throws SQLException, ClassNotFoundException {
-		List<CategoryBean> categoryList = new ArrayList<CategoryBean>();
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, tcs.getTaskName());
+            pstmt.setInt(2, tcs.getCategoryId());
+            pstmt.setDate(3, tcs.getLimitDate());
+            pstmt.setString(4, tcs.getUserId());
+            pstmt.setString(5, tcs.getStatusCode());
+            pstmt.setString(6, tcs.getMemo());
 
-		try (Connection con = ConnectionManager.getConnection();
-				Statement stmt = con.createStatement();
-				ResultSet res = stmt.executeQuery("SELECT * FROM m_category")) {
-			while (res.next()) {
-				CategoryBean cb = new CategoryBean();
-				cb.setCategoryId(res.getInt("category_id"));
-				cb.setCategoryName(res.getString("category_name"));
+            count = pstmt.executeUpdate(); // SQL文を実行し、影響を受けたレコード数を取得
+        }
+        return count;
+    }
 
-				categoryList.add(cb);
-			}
+    /**
+     * データベースからカテゴリのリストを取得します。
+     *
+     * @return カテゴリを表すCategoryBeanオブジェクトのリスト
+     * @throws SQLException            データベースアクセスエラーが発生した場合
+     * @throws ClassNotFoundException データベースドライバクラスが見つからない場合
+     */
+    public List<CategoryBean> selectCategory() throws SQLException, ClassNotFoundException {
+        List<CategoryBean> categoryList = new ArrayList<>();
 
-		}
-		return categoryList;
-	}
-	// テーブルに入っているStatusを表示させる為のメソッド
-	public List<StatusBean> selectStatus() throws SQLException, ClassNotFoundException {
-		List<StatusBean> statusList = new ArrayList<StatusBean>();
+        try (Connection con = ConnectionManager.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet res = stmt.executeQuery("SELECT * FROM m_category")) {
+            while (res.next()) {
+                CategoryBean cb = new CategoryBean();
+                cb.setCategoryId(res.getInt("category_id"));
+                cb.setCategoryName(res.getString("category_name"));
 
-		try (Connection con = ConnectionManager.getConnection();
-				Statement stmt = con.createStatement();
-				ResultSet res = stmt.executeQuery("SELECT * FROM m_status")) {
-			while (res.next()) {
-				StatusBean sb = new StatusBean();
-				sb.setStatusCode(res.getString("status_code"));
-				sb.setStatusName(res.getString("status_name"));
+                categoryList.add(cb);
+            }
+        }
+        return categoryList;
+    }
 
-				statusList.add(sb);
-			}
+    /**
+     * データベースからステータスのリストを取得します。
+     *
+     * @return ステータスを表すStatusBeanオブジェクトのリスト
+     * @throws SQLException            データベースアクセスエラーが発生した場合
+     * @throws ClassNotFoundException データベースドライバクラスが見つからない場合
+     */
+    public List<StatusBean> selectStatus() throws SQLException, ClassNotFoundException {
+        List<StatusBean> statusList = new ArrayList<>();
 
-		}
-		return statusList;
+        try (Connection con = ConnectionManager.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet res = stmt.executeQuery("SELECT * FROM m_status")) {
+            while (res.next()) {
+                StatusBean sb = new StatusBean();
+                sb.setStatusCode(res.getString("status_code"));
+                sb.setStatusName(res.getString("status_name"));
 
-	}
+                statusList.add(sb);
+            }
+        }
+        return statusList;
+    }
 }
