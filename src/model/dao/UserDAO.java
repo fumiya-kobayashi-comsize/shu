@@ -7,8 +7,11 @@ import java.sql.SQLException;
 
 import model.entity.UserBean;
 
+/**
+ * m_userテーブルのDAOです。
+ * @author 櫻井藍子
+ */
 public class UserDAO {
-
 	/**
 	 * 指定されたIDからユーザの情報を検索して返します。
 	 * @param userId ユーザID

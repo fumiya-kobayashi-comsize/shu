@@ -21,7 +21,8 @@ import model.dao.UserDAO;
 import model.entity.UserBean;
 
 /**
- * Servlet implementation class LoginServlet
+ * 安全なパスワードを生成し、ログイン認証のための処理をする
+ * @author 櫻井藍子
  */
 @WebServlet("/login-servlet")
 public class LoginServlet extends HttpServlet {
@@ -38,7 +39,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	public LoginServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -46,7 +46,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -91,11 +90,10 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("login-failure.jsp"); // ログイン失敗画面
 			rd.forward(request, response);
 		}
-
 	}
 
 	/**
-	 *　平文のパスワードとソルトから安全なパスワードを生成し、返却します
+	 * 平文のパスワードとソルトから安全なパスワードを生成し、返却します
 	 *
 	 * @param password 平文のパスワード
 	 * @param salt ソルト
