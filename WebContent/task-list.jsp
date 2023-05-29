@@ -49,7 +49,7 @@
 				<%=task.getMemo()%>
 			</td>
 			<td>
-				<form action="task-alter-confirm-servlet" method="POST">
+				<form action="task-alter-confirm-servlet" method="GET">
 					<input type="submit" value="変更">
 					<input type="hidden" name="updatedTask" value="<%=task.getTaskId()%>, <%=task.getTaskName()%>">
 					<input type="hidden" name="category" value="<%=task.getCategoryId()%>, <%=task.getCategoryName()%>">
