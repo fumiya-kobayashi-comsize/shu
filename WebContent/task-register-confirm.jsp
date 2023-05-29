@@ -54,7 +54,7 @@
 				<td><%=tcs.getMemo()%></td>
 			</tr>
 		</table>
-		<input type="submit" value="変更する">
+		<input type="submit" value="登録する">
 	</form>
 	<form action="task-register.jsp" method="POST">
 		<input type="submit" value="タスク登録画面へ">
