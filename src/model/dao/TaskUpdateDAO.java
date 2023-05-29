@@ -10,14 +10,16 @@ import model.entity.TaskCategoryStatusBean;
 public class TaskUpdateDAO {
 
 	public int update(TaskCategoryStatusBean tcs) throws ClassNotFoundException {
-		//編集内容をデータベースに反映
+
+		//編集内容をデータベースに反映するためのUPDATE文
 		String sql = "UPDATE t_task SET task_id = ?, task_name = ?, category_id = ?, limit_date = ?, user_id = ?, status_code = ?, memo = ? WHERE item_code = ?";
 		int count = 0;
 
-		// データベースへの接続の取得、Statementの取得、SQLステートメントの実行
+		// データベースへの接続の取得、PreparedStatementの取得、SQLステートメントの実行
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);) {
 
+			//Beanから編集内容の取得
 			pstmt.setInt(1, tcs.getTaskId());
 			pstmt.setString(2, tcs.getTaskName());
 			pstmt.setInt(3, tcs.getCategoryId());
@@ -26,19 +28,23 @@ public class TaskUpdateDAO {
 			pstmt.setString(6, tcs.getStatusCode());
 			pstmt.setString(7, tcs.getMemo());
 
+			//実行結果の件数を取得
 			count = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 		//実行結果の件数を返す
 		return count;
 	}
 
 	public TaskCategoryStatusBean taskDetail(int taskId) throws ClassNotFoundException {
 
+		//Beanのインスタンス化
 		TaskCategoryStatusBean task = new TaskCategoryStatusBean();
 
+		//タスク情報を取得するSELECT文
 		String sql = "SELECT "
 						+ "task_id, task_name, category_id, category_name, limit_date, user_id, status_code, status_name, memo "
 						+ "FROM "
@@ -49,7 +55,7 @@ public class TaskUpdateDAO {
 							+ "ON t1.status_code = t3.status_code "
 						+ "WHERE task_id = ?";
 
-		// データベースへの接続の取得、Statementの取得、SQLステートメントの実行
+		// データベースへの接続の取得、PreparedStatementの取得、SQLステートメントの実行
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);) {
 
@@ -57,7 +63,7 @@ public class TaskUpdateDAO {
 
 			ResultSet res = pstmt.executeQuery();
 
-			// 結果の操作
+			//データベース上のタスク情報をBeanにセット
 			while (res.next()) {
 
 				task.setTaskId(taskId);
@@ -75,7 +81,7 @@ public class TaskUpdateDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		//Beanを返す
 		return task;
 	}
 
