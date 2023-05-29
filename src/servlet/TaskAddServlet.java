@@ -82,7 +82,7 @@ public class TaskAddServlet extends HttpServlet {
 		boolean doInsert = true;
 		// DAOからcountを受け取るためcount変数記載
 		int count = 0;
-
+		// sessionの利用
 		HttpSession session = request.getSession();
 		TaskCategoryStatusBean tcs = (TaskCategoryStatusBean)session.getAttribute("tcs");
 
