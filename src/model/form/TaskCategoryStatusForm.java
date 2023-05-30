@@ -10,14 +10,41 @@ import model.entity.TaskCategoryStatusBean;
  */
 
 public class TaskCategoryStatusForm {
+	/**
+	 * タスクID
+	 */
 	private int taskId;
+	/**
+	 * タスク名
+	 */
 	private String taskName;
+	/**
+	 * カテゴリーID
+	 */
 	private int categoryId;
+	/**
+	 * 期限日の文字列
+	 */
 	private String limitDateStr;
+	/**
+	 * ユーザーID
+	 */
 	private String userId;
+	/**
+	 * ステータスコード
+	 */
 	private String statusCode;
+	/**
+	 * メモ
+	 */
 	private String memo;
+	/**
+	 * カテゴリ名
+	 */
 	private String categoryName;
+	/**
+	 * ステータス名
+	 */
 	private String statusName;
 
 	/**
@@ -203,8 +230,6 @@ public class TaskCategoryStatusForm {
 				throw new IllegalArgumentException();
 			}
 			tcs.setLimitDate(limitDate);
-		} else {
-			tcs.setLimitDate(null);
 		}
 
 		tcs.setStatusCode(statusCode);

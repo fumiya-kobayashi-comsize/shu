@@ -41,10 +41,6 @@ public class TaskRegisterConfirmServlet extends HttpServlet {
             throws ServletException, IOException {
         // UTF-8の書式でコードを受け取る
         request.setCharacterEncoding("UTF-8");
-        // boolean型で振り分けをするための変数
-        boolean doInsert = true;
-        // DAOからcountを受け取るための変数
-        int count = 0;
         // JSPからのパラメータ名を受け取る変数たち
         String category = request.getParameter("category");
         String taskName = request.getParameter("taskName");

@@ -108,12 +108,12 @@ public class TaskAddServlet extends HttpServlet {
 		}
 		// DAOから帰ってきたcountが0だったら
 		if (count == 0) {
-			// 登録失敗ページにリダイレクトする
+			// 登録失敗ページにフォワードする
 			RequestDispatcher rd = request.getRequestDispatcher("register-failure.jsp");
 			rd.forward(request, response);
 
 		} else {
-			// 登録成功ページにリダイレクトする
+			// 登録成功ページにフォワードする
 			RequestDispatcher rd = request.getRequestDispatcher("register-success.jsp");
 			rd.forward(request, response);
 		}
