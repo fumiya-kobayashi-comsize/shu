@@ -7,6 +7,7 @@
 <title>ログイン</title>
 </head>
 <body>
+	<%session.invalidate(); %>
 	<h1>ログイン</h1>
 	<hr>
 	<h2>ユーザIDとパスワードを入力してください</h2>
