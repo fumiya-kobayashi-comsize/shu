@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="model.entity.UserBean" %>
+    pageEncoding="UTF-8" import="model.entity.UserBean, model.entity.TaskCategoryStatusBean" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,44 +14,53 @@
 
 	<h2>商品情報を以下の内容に変更します。よろしいですか？</h2>
 
-	<% UserBean user = (UserBean) session.getAttribute("user"); %>
+	<%
+	TaskCategoryStatusBean task = (TaskCategoryStatusBean) session.getAttribute("task");
+	UserBean user = (UserBean)session.getAttribute("user");
+	%>
 	<form action="task-alter-servlet" method="post">
 	<table border="1">
 		<tr>
 			<th>タスク名</th>
 			<td>
 				<%=request.getAttribute("taskName") %>
-				<input type="hidden" value="<%=request.getAttribute("taskId") %>
-				,<%=request.getAttribute("taskName") %>" name="updatedTask">
+				<input type="hidden" value="<%=task.getTaskId() %>,<%=request.getAttribute("taskName")%>" name="updatedTask">
 			</td>
 		</tr>
 		<tr>
 			<th>カテゴリ情報</th>
-			<td><%=request.getAttribute("categoryName") %></td>
+			<td>
+				<%=request.getAttribute("categoryName") %>
+				<input type="hidden" value="<%=request.getAttribute("categoryId") %>,<%=request.getAttribute("categoryName")%>" name="category">
+			</td>
 		</tr>
 		<tr>
 			<th>期限</th>
-			<td><%=request.getAttribute("limitDate") %></td>
+			<td>
+				<%=request.getAttribute("limitDate") %>
+				<input type="hidden" value="<%=request.getAttribute("limitDate")%>" name="limitDate">
+			</td>
 		</tr>
 		<tr>
 			<th>担当者情報</th>
 			<td>
 				<%=user.getUserName() %>
-				<input type="hidden" value="<%=user.getUserId() %>
-				,<%=user.getUserName() %>" name="user">
+				<input type="hidden" value="<%=user.getUserId()%>,<%=user.getUserName()%>" name="user">
 			</td>
 		</tr>
 		<tr>
 			<th>ステータス情報</th>
 			<td>
 				<%=request.getAttribute("statusName") %>
-				<input type="hidden" value="<%=request.getAttribute("statusCode") %>
-				,<%=request.getAttribute("statusName") %>" name="status">
+				<input type="hidden" value="<%=request.getAttribute("statusCode")%>,<%=request.getAttribute("statusName")%>" name="status">
 			</td>
 		</tr>
 		<tr>
 			<th>メモ</th>
-			<td><%=request.getAttribute("memo") %></td>
+			<td>
+				<%=request.getAttribute("memo") %>
+				<input type="hidden" value="<%=request.getAttribute("memo")%>" name="memo">
+			</td>
 		</tr>
 		<tr class="table-button">
 			<td colspan="2"><input type="submit" value="変更する"></td>

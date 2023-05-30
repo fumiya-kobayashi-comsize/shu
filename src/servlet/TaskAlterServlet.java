@@ -71,7 +71,7 @@ public class TaskAlterServlet extends HttpServlet {
 		} catch (IllegalArgumentException e) {
 			//Date型変換が失敗した場合の画面への転送
 			count = 0;
-			RequestDispatcher rd = request.getRequestDispatcher("item-alter-result.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("task-alter-result.jsp");
 			rd.forward(request, response);
 		}
 
@@ -90,7 +90,7 @@ public class TaskAlterServlet extends HttpServlet {
 		String memo = request.getParameter("memo");
 
 
-		//編集内容の格納
+		//編集内容をBeanに格納
 		TaskCategoryStatusBean tcs = new TaskCategoryStatusBean();
 		tcs.setTaskId(taskId);
 		tcs.setTaskName(taskName);
@@ -109,12 +109,11 @@ public class TaskAlterServlet extends HttpServlet {
 		TaskUpdateDAO dao = new TaskUpdateDAO();
 
 		//編集内容が変更されているかどうかの確認
-		if (task.getTaskName() != taskName
-				&& task.getCategoryId() != categoryId
-				&& task.getLimitDate() != limitDate
-				&& task.getTaskName() != taskName
-				&& task.getStatusCode() != statusCode
-				&& task.getMemo() != memo) {
+		if ( !(taskName.equals(task.getTaskName())
+				&& categoryId == task.getCategoryId()
+				&& limitDate.equals(task.getLimitDate())
+				&& statusCode.equals(task.getStatusCode())
+				&& memo.equals(task.getMemo())) ) {
 
 			try {
 				//アップデートの実行
@@ -127,7 +126,7 @@ public class TaskAlterServlet extends HttpServlet {
 
 				//失敗画面への転送
 				count = 0;
-				RequestDispatcher rd = request.getRequestDispatcher("item-alter-result.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("task-alter-result.jsp");
 				rd.forward(request, response);
 
 			}
@@ -139,13 +138,13 @@ public class TaskAlterServlet extends HttpServlet {
 			request.setAttribute("count", count);
 
 			//失敗画面への転送
-			RequestDispatcher rd = request.getRequestDispatcher("item-alter-result.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("task-alter-result.jsp");
 			rd.forward(request, response);
 
 		}
 
 		//成功画面への転送
-		RequestDispatcher rd = request.getRequestDispatcher("item-alter-result.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("task-alter-result.jsp");
 		rd.forward(request, response);
 	}
 

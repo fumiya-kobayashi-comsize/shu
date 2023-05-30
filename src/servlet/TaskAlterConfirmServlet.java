@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.dao.TaskRegisterDAO;
 import model.dao.TaskUpdateDAO;
+import model.entity.CategoryBean;
+import model.entity.StatusBean;
 import model.entity.TaskCategoryStatusBean;
 
 /**
@@ -38,16 +43,23 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 		int taskId = Integer.parseInt(request.getParameter("taskId"));
 
 		//DAOの利用
-		TaskUpdateDAO dao = new TaskUpdateDAO();
+		TaskUpdateDAO updateDAO = new TaskUpdateDAO();
+		TaskRegisterDAO registerDAO = new TaskRegisterDAO();
 
 		try {
 			//タスクの詳細情報を取得
-			TaskCategoryStatusBean task = dao.taskDetail(taskId);
-			//取得した詳細情報をセッションスコープに格納
+			TaskCategoryStatusBean task = updateDAO.taskDetail(taskId);
+			//カテゴリーとステータスの詳細情報を取得
+			List<CategoryBean> categoryList = registerDAO.selectCategory();
+			List<StatusBean> statusList = registerDAO.selectStatus();
+
+			//取得した情報をセッションスコープに格納
 			HttpSession session = request.getSession();
 			session.setAttribute("task", task);
+			session.setAttribute("categoryList", categoryList);
+			session.setAttribute("statusList", statusList);
 
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -73,11 +85,10 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 		String categoryName = splitCategory[1];
 
 		String limitDate = request.getParameter("limitDate");
-		String userName = request.getParameter("userName");
 
 		String status = request.getParameter("status");
 		String[] splitStatus = status.split(",");
-		int statusId = Integer.parseInt(splitStatus[0]);
+		String statusCode = splitStatus[0];
 		String statusName = splitStatus[1];
 
 		String memo = request.getParameter("memo");
@@ -86,8 +97,7 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 		request.setAttribute("taskName", taskName);
 		request.setAttribute("categoryId", categoryId);
 		request.setAttribute("limitDate", limitDate);
-		request.setAttribute("userName", userName);
-		request.setAttribute("statusId", statusId);
+		request.setAttribute("statusCode", statusCode);
 		request.setAttribute("memo", memo);
 		request.setAttribute("categoryName", categoryName);
 		request.setAttribute("statusName", statusName);

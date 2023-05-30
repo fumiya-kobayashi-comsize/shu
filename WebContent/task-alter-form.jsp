@@ -21,26 +21,28 @@
 		%>
 		<tr>
 			<th>タスク名</th>
-			<td><%=task.getTaskName() %></td>
+			<td>
+				<input type="text" name="taskName" value="<%=task.getTaskName() %>">
+			</td>
 		</tr>
 		<tr>
 			<th>カテゴリ情報</th>
 			<td>
 				<% List<CategoryBean> categoryList = (List<CategoryBean>) session.getAttribute("categoryList"); %>
 				<select name="category">
-				<option value="<%=task.getCategoryId() %>, <%=task.getCategoryName() %>"><%=task.getCategoryName() %></option>
-				<%
-					for (int i = 0; i < categoryList.size(); i++) {
-						CategoryBean category = categoryList.get(i);
-						if (category.getCategoryId() == task.getCategoryId()) {
-							continue;
-						} else {
-				%>
-						<option value="<%=category.getCategoryId() %>, <%=category.getCategoryName() %>"><%=category.getCategoryName() %></option>
+					<option value="<%=task.getCategoryId() %>,<%=task.getCategoryName() %>"><%=task.getCategoryName() %></option>
 					<%
-						}
-					}
+						for (int i = 0; i < categoryList.size(); i++) {
+							CategoryBean category = categoryList.get(i);
+							if (category.getCategoryId() == task.getCategoryId()) {
+								continue;
+							} else {
 					%>
+							<option value="<%=category.getCategoryId() %>,<%=category.getCategoryName() %>"><%=category.getCategoryName() %></option>
+						<%
+							}
+						}
+						%>
 				</select>
 			</td>
 		</tr>
@@ -50,14 +52,14 @@
 		</tr>
 		<tr>
 			<th>担当者情報</th>
-			<td><input type="text" value="<%=user.getUserName() %>" name="userName"></td>
+			<td><%=user.getUserName() %></td>
 		</tr>
 		<tr>
 			<th>ステータス情報</th>
 			<td>
 				<% List<StatusBean> statusList = (List<StatusBean>) session.getAttribute("statusList"); %>
 				<select name="status">
-				<option value="<%=task.getStatusCode() %>, <%=task.getStatusName() %>"><%=task.getStatusName() %></option>
+				<option value="<%=task.getStatusCode() %>,<%=task.getStatusName() %>"><%=task.getStatusName() %></option>
 				<%
 					for (int i = 0; i < statusList.size(); i++) {
 						StatusBean status = statusList.get(i);
@@ -65,7 +67,7 @@
 							continue;
 						} else {
 				%>
-						<option value="<%=status.getStatusCode() %>, <%=status.getStatusName() %>"><%=status.getStatusName() %></option>
+						<option value="<%=status.getStatusCode() %>,<%=status.getStatusName() %>"><%=status.getStatusName() %></option>
 					<%
 						}
 					}

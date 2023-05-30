@@ -28,7 +28,7 @@
 		</tr>
 		<tr>
 			<th>カテゴリ情報</th>
-			<td><%=tcs.getCategoryName() %>"></td>
+			<td><%=tcs.getCategoryName() %></td>
 		</tr>
 		<tr>
 			<th>期限</th>
@@ -40,7 +40,7 @@
 		</tr>
 		<tr>
 			<th>ステータス情報</th>
-			<td><%=tcs.getStatusName() %>"></td>
+			<td><%=tcs.getStatusName() %></td>
 		</tr>
 		<tr>
 			<th>メモ</th>
@@ -61,7 +61,7 @@
 		</tr>
 		<tr>
 			<th>カテゴリ情報</th>
-			<td><%=tcs.getCategoryName() %>"></td>
+			<td><%=tcs.getCategoryName() %></td>
 		</tr>
 		<tr>
 			<th>期限</th>
@@ -73,7 +73,7 @@
 		</tr>
 		<tr>
 			<th>ステータス情報</th>
-			<td><%=tcs.getStatusName() %>"></td>
+			<td><%=tcs.getStatusName() %></td>
 		</tr>
 		<tr>
 			<th>メモ</th>
