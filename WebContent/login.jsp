@@ -10,7 +10,6 @@
 	<h1>ログイン</h1>
 	<hr>
 	<h2>ユーザIDとパスワードを入力してください</h2>
-	<div>
 	<form action="login-servlet" method="POST">
 		<table>
 			<tr>
@@ -28,6 +27,9 @@
 		<input type="submit" value="ログイン">
 		<input type="reset" value="取消">
 	</form>
-	</div>
+	<br>
+	<form action="user-register.jsp" method="POST">
+		<input type="submit" value="新規登録">
+	</form>
 </body>
 </html>

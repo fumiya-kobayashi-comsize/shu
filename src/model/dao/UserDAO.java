@@ -47,4 +47,33 @@ public class UserDAO {
 		}
 		return user;
 	}
+
+	/**
+	 * 入力された内容で新規ユーザ情報の登録をします。
+	 * @param user ユーザオブジェクト
+	 * @return 処理件数
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public int addUser(UserBean user)
+			throws SQLException, ClassNotFoundException {
+
+		int processingNumber = 0; //処理件数
+
+		String sql = "INSERT INTO task_db.m_user(user_id,password,user_name)VALUES(?,?,?)";
+
+		// データベースへの接続の取得、Statementの取得
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+
+			// プレースホルダへの値の設定
+			pstmt.setString(1, user.getUserId());
+			pstmt.setString(2, user.getPassword());
+			pstmt.setString(3, user.getUserName());
+
+			// SQLステートメントの実行
+			processingNumber = pstmt.executeUpdate();
+		}
+		return processingNumber;
+	}
 }
