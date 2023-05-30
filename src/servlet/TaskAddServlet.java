@@ -16,6 +16,7 @@ import model.dao.TaskRegisterDAO;
 import model.entity.CategoryBean;
 import model.entity.StatusBean;
 import model.entity.TaskCategoryStatusBean;
+import model.form.TaskCategoryStatusForm;
 
 /**
  * タスク追加のServletクラスです。
@@ -85,9 +86,13 @@ public class TaskAddServlet extends HttpServlet {
 		int count = 0;
 		// sessionの利用
 		HttpSession session = request.getSession();
-		TaskCategoryStatusBean tcs = (TaskCategoryStatusBean)session.getAttribute("tcs");
-
-
+		TaskCategoryStatusForm tcsf = (TaskCategoryStatusForm)session.getAttribute("tcsf");
+		TaskCategoryStatusBean tcsb = null;
+		try {
+			tcsb = tcsf.toEntity();
+		} catch (IllegalArgumentException e) {
+			doInsert = false;
+		}
 		// DAOをインスタンス化
 		TaskRegisterDAO dao = new TaskRegisterDAO();
 
@@ -95,7 +100,7 @@ public class TaskAddServlet extends HttpServlet {
 			// booleanがtrueだったら
 			if (doInsert) {
 				// タスクをデータベースに登録する
-				count = dao.insertTask(tcs);
+				count = dao.insertTask(tcsb);
 			}
 
 		} catch (SQLException | ClassNotFoundException e) {
