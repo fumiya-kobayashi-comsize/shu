@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="model.entity.ItemCategoryBean"%>
+	pageEncoding="UTF-8" import="model.entity.TaskBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
 	<hr>
 
 	<%
-		TaskCategoryBean itemResult = (TaskCategoryBean) session.getAttribute("taskDetail");
+		TaskBean taskDetail = (TaskBean) session.getAttribute("taskDetail");
 	%>
 	<h2>次のデータを削除できませんでした。</h2>
 	<br>
@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<th>タスク名</th>
-				<td><%=taskDetail.getTaskyName()%></td>
+				<td><%=taskDetail.getTaskName()%></td>
 			</tr>
 			<tr>
 				<th>カテゴリID</th>
@@ -46,7 +46,7 @@
 				<th>メモ</th>
 				<td><%=taskDetail.getMemo()%></td>
 			</tr>
-			<tr>
+<%-- 			<tr>
 				<th>登録日時</th>
 				<td><%=taskDetail.getCreateDateTime()%></td>
 			</tr>
@@ -54,6 +54,7 @@
 				<th>更新日時</th>
 				<td><%=taskDetail.getUpdateDateTime()%></td>
 			</tr>
+--%>
 		</table>
 
 	<br>
