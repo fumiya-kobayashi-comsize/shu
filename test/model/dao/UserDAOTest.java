@@ -37,4 +37,22 @@ class UserDAOTest {
 		assertNull(user.getPassword());
 		assertNull(user.getUserName());
 	}
+
+	@Test
+	void testAddUser() {
+		UserDAO dao = new UserDAO();
+		UserBean user = new UserBean();
+
+		user.setUserId("admin0");
+		user.setUserName("shu");
+		user.setPassword("385063b386c587021ca72d1903d553e8189bee06ee60d85c4db2a864477f2538");
+
+		int count = 0;
+		try {
+			count = dao.addUser(user);
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		assertEquals(1, count);
+	}
 }
