@@ -12,7 +12,7 @@
 	<hr>
 	<h2>ユーザ情報を入力してください</h2>
 	<% UserBean user = (UserBean) session.getAttribute("newUser"); %>
-	<form action="user-confirm-servlet" method="POST">
+	<form action="user-confirm-servlet" method="POST" id="userForm">
 		ユーザID<br>
 		<input type="text" name="userId" maxlength="24" required
 			<%if (!(user == null)) {%>
@@ -41,7 +41,7 @@
 		<p id="passwordMatchMessage" style="color: red;"></p>
 
 		<input type="submit" value="登録確認" id="submitBtn" disabled>
-		<input type="reset" value="取消">
+		<input type="reset" value="取消" onclick="resetForm(); return false;">
 	</form>
 	<br>
 	<form action="login.jsp" method="POST">
