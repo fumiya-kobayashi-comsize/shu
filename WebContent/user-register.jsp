@@ -20,19 +20,27 @@
 			<%}%>
 		><br>
 		パスワード<br>
-		<input type="password" name="password" required><br>
+		<input type="password" name="password" required
+			<%if (!(user == null)) {%>
+				value="<%=user.getPassword()%>"
+			<%}%>
+		><br>
 		パスワードを再入力<br>
-		<input type="password" name="passwordConfirm" required oninput="checkPasswordMatch()"><br>
+		<input type="password" name="passwordConfirm" required oninput="checkPasswordMatch()"
+			<%if (!(user == null)) {%>
+				value="<%=session.getAttribute("passwordConfirm")%>"
+			<%}%>
+		><br>
 		ユーザ名<br>
 		<input type="text" name="userName" maxlength="20" required
 			<%if (!(user == null)) {%>
-				value="<%=user.getUserId()%>"
+				value="<%=user.getUserName()%>"
 			<%}%>
 		><br>
 
 		<p id="passwordMatchMessage" style="color: red;"></p>
 
-		<input type="submit" value="登録確認">
+		<input type="submit" value="登録確認" id="submitBtn" disabled>
 		<input type="reset" value="取消">
 	</form>
 	<br>

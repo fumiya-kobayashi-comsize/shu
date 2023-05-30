@@ -4,7 +4,9 @@ function checkPasswordMatch() {
 
     if (password1 !== password2) {
         document.getElementById("passwordMatchMessage").innerHTML = "パスワードが一致しません";
+        document.getElementById("submitBtn").disabled = true;
     } else {
         document.getElementById("passwordMatchMessage").innerHTML = "";
+        document.getElementById("submitBtn").disabled = false;
     }
 }
