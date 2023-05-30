@@ -231,7 +231,7 @@ public class TaskCategoryStatusForm {
 			}
 			tcs.setLimitDate(limitDate);
 		}
-
+		tcs.setTaskId(taskId);
 		tcs.setStatusCode(statusCode);
 		tcs.setMemo(memo);
 		tcs.setUserId(userId);
