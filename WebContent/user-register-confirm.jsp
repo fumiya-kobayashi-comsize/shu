@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,model.entity.UserBean"%>
+	pageEncoding="UTF-8" import="java.util.List,model.entity.UserBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,27 +12,30 @@
 	<h2>以下の内容で登録しますか？</h2>
 	<% UserBean user = (UserBean) session.getAttribute("newUser"); %>
 	<form action="user-register-servlet" method="POST">
-	<table>
+		<table>
 			<tr>
 				<th>ユーザID</th>
-				<td><%=user.getUserId() %><td>
-			</tr>
-			<tr>
-				<th>ユーザ名</th>
-				<td><%=user.getUserName() %><td>
+				<td><%=user.getUserId() %></td>
 			</tr>
 			<tr>
 				<th>パスワード</th>
-				<td><%
-					String password = user.getPassword();
-					int characterCount = password.length();
-					for (int i = 0; i < characterCount; i++) { %>
-					    *
-					<% } %>
-				<td><br>
+				<td>
+					<%
+						String password = user.getPassword();
+						int characterCount = password.length();
+						StringBuilder asterisks = new StringBuilder();
+						for (int i = 0; i < characterCount; i++) {
+							asterisks.append("*");
+						}
+					%> <%=asterisks.toString()%>
+				</td>
 			</tr>
-		</table><br>
-		<input type="submit" value="登録する">
+			<tr>
+				<th>ユーザ名</th>
+				<td><%=user.getUserName() %></td>
+			</tr>
+		</table>
+		<br> <input type="submit" value="登録する">
 	</form>
 	<br>
 	<form action="user-register.jsp" method="POST">
