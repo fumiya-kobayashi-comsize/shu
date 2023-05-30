@@ -5,9 +5,14 @@ package model.entity;
  * @author 吉澤誠和
  */
 public class StatusBean {
-
-    private String statusCode; // ステータスコード
-    private String statusName; // ステータス名
+	/**
+	 * ステータスコード
+	 */
+    private String statusCode;
+    /**
+     * ステータスネーム
+     */
+    private String statusName;
 
     /**
      * StatusBeanクラスの新しいインスタンスを作成します。

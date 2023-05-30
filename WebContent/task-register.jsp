@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="model.entity.UserBean"
-	import="java.util.List,model.entity.CategoryBean"
-	import="java.util.List,model.entity.StatusBean"%>
+	pageEncoding="UTF-8"
+	import="model.entity.UserBean,java.util.List,model.entity.CategoryBean,java.util.List,model.entity.StatusBean"%>
 <!DOCTYPE html>
 <html>
 <head>

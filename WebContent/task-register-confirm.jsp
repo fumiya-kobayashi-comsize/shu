@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="model.entity.TaskCategoryStatusBean"
-	import="java.util.List,model.entity.CategoryBean"
-	import="java.util.List,model.entity.StatusBean"
-	import = "java.util.List,model.entity.UserBean"%>
+	import="java.util.List,model.entity.CategoryBean,java.util.List,model.entity.StatusBean,
+	java.util.List,model.entity.UserBean,java.util.List,model.form.TaskCategoryStatusForm"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +11,7 @@
 <body>
 
 	<%
-		TaskCategoryStatusBean tcs = (TaskCategoryStatusBean) session.getAttribute("tcs");
+		TaskCategoryStatusForm tcsf = (TaskCategoryStatusForm) session.getAttribute("tcsf");
 	%>
 
 	<h1>本当に登録するの？？(／≧ω＼)</h1>
@@ -21,16 +20,16 @@
 		<table>
 			<tr>
 				<th>タスク名</th>
-				<td><%=tcs.getTaskName()%></td>
+				<td><%=tcsf.getTaskName()%></td>
 			</tr>
 			<tr>
 				<th>カテゴリ情報</th>
 
-				<td><%=tcs.getCategoryName()%></td>
+				<td><%=tcsf.getCategoryName()%></td>
 			</tr>
 			<tr>
 				<th>期限</th>
-				<td><%=tcs.getLimitDate()%></td>
+				<td><%=tcsf.getLimitDateStr()%></td>
 			</tr>
 			<tr>
 				<th>担当者情報</th>
@@ -46,12 +45,12 @@
 
 			<tr>
 				<th>ステータス情報</th>
-				<td><%=tcs.getStatusName()%></td>
+				<td><%=tcsf.getStatusName()%></td>
 			</tr>
 
 			<tr>
 				<th>メモ</th>
-				<td><%=tcs.getMemo()%></td>
+				<td><%=tcsf.getMemo()%></td>
 			</tr>
 		</table>
 		<input type="submit" value="登録する">
