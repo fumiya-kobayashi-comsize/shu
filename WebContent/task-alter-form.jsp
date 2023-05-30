@@ -85,7 +85,7 @@
 	</table>
 	</form>
 
-	<form action="task-detail-servlet" method="post">
+	<form action="task-list-servlet" method="post">
 		<input type="hidden" value="<%=task.getTaskName() %>" name="taskName">
 		<input type="submit" value="一覧表示へ">
 	</form>
