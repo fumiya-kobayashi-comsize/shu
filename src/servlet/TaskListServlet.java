@@ -51,12 +51,16 @@ public class TaskListServlet extends HttpServlet {
 		// DAOの生成
 		TaskShowDAO dao = new TaskShowDAO();
 
+
+		//セッションから情報の取得
 		HttpSession session = request.getSession();
 		UserBean user = (UserBean)session.getAttribute("user");
 		String userId = user.getUserId();
+		String userName = user.getUserName();
+
 
 		try {
-			// タスクマスタからタスク情報を取得
+			// 引数にuserIdを指定してタスクマスタからタスク情報を取得
 			taskList = dao.selectAll(userId);
 
 
@@ -67,10 +71,12 @@ public class TaskListServlet extends HttpServlet {
 
 		// リクエストスコープへの属性の設定
 		request.setAttribute("taskList", taskList);
+		request.setAttribute("userName", userName);
 
 		// 商品一覧画面への転送
 		RequestDispatcher rd = request.getRequestDispatcher("task-list.jsp");
 		rd.forward(request, response);
+
 
 	}
 

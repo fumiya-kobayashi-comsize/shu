@@ -7,6 +7,7 @@
 <title>タスク一覧表示画面</title>
 </head>
 <body>
+
 	<h1>タスク一覧表示画面</h1>
 	<hr>
 	<%
@@ -14,7 +15,7 @@
 	%>
 
 	<table>
-	<tr>
+		<tr>
 			<th align="center">タスク名</th>
 			<th align="center">カテゴリー情報</th>
 			<th align="center">期限</th>
@@ -37,7 +38,7 @@
 				<%=task.getLimitDate()%>
 			</td>
 			<td>
-				<%=task.getUserId()%>
+				<%=request.getAttribute("userName") %>
 			</td>
 			<td>
 				<%=task.getStatusName()%>
@@ -58,6 +59,7 @@
 				<form action="task-delete-confirm-servlet" method="GET">
 					<input type="submit" value="削除確認">
 					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">
+<%-- 					<input type="hidden" name="taskId" value="<%=task.getUserName()%>"> --%>
 <%-- 					<input type="hidden" name="taskList" value="<%=request.getAttribute("taskList")%>"> --%>
 				</form>
 			</td>
