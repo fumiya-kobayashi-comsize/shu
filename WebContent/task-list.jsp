@@ -15,21 +15,18 @@
 
 	<table>
 	<tr>
-			<th align="left">タスク名　　　</th>
-			<th align="left">カテゴリー情報　　　　　　</th>
-			<th align="left">期限　　　　　　</th>
-			<th align="left">担当者情報　　　　　　</th>
-			<th align="left">ステータス情報　　　　　　</th>
-			<th align="left">メモ　　　　　　</th>
+			<th align="center">タスク名</th>
+			<th align="center">カテゴリー情報</th>
+			<th align="center">期限</th>
+			<th align="center">担当者情報</th>
+			<th align="center">ステータス情報</th>
+			<th align="center">メモ</th>
 		</tr>
 
 		<%
 			for (TaskCategoryStatusBean task : taskList) {
 		%>
 		<tr>
-			<td><a
-				href="TaskDeleteConfirmServlet?task_id=<%=task.getTaskId()%>"><%=task.getTaskId()%></a></td>
-
 			<td>
 				<%=task.getTaskName()%>
 			</td>
@@ -58,11 +55,10 @@
 				</form>
 			</td>
 			<td>
-				<form action="task-delete-confirm.jsp" method="POST">
+				<form action="task-delete-confirm-servlet" method="GET">
 					<input type="submit" value="削除確認">
 					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">
-					<input type="hidden" name="taskList" value="<%=request.getAttribute("taskList")%>">
-
+<%-- 					<input type="hidden" name="taskList" value="<%=request.getAttribute("taskList")%>"> --%>
 				</form>
 			</td>
 		</tr>
