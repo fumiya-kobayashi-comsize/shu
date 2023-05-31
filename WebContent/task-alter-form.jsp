@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.List, model.entity.UserBean, model.entity.CategoryBean, model.entity.StatusBean, model.entity.TaskCategoryStatusBean"%>
+	import="java.util.List, model.entity.UserBean, model.entity.CategoryBean, model.entity.StatusBean, model.form.TaskCategoryStatusForm"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,7 @@
 	<form action="task-alter-confirm-servlet" method="post">
 	<table border="1">
 		<%
-		TaskCategoryStatusBean task = (TaskCategoryStatusBean) session.getAttribute("task");
+		TaskCategoryStatusForm task = (TaskCategoryStatusForm) session.getAttribute("task");
 		UserBean user = (UserBean)session.getAttribute("user");
 		%>
 		<tr>
@@ -48,7 +48,19 @@
 		</tr>
 		<tr>
 			<th>期限</th>
-			<td><input type="text" value="<%=task.getLimitDate() %>" name="limitDate"></td>
+			<td>
+				<%
+				if (task.getLimitDateStr() == null) {
+				%>
+					<input type="text" value="" placeholder="YYYY-MM-DD" name="limitDate" maxlength = "10">
+				<%
+				} else {
+				%>
+					<input type="text" value="<%=task.getLimitDateStr() %>" name="limitDate" maxlength = "10">
+				<%
+				}
+				 %>
+			</td>
 		</tr>
 		<tr>
 			<th>担当者情報</th>

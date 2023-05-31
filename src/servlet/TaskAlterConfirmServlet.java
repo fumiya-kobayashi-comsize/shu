@@ -16,27 +16,33 @@ import model.dao.TaskRegisterDAO;
 import model.dao.TaskUpdateDAO;
 import model.entity.CategoryBean;
 import model.entity.StatusBean;
-import model.entity.TaskCategoryStatusBean;
 import model.form.TaskCategoryStatusForm;
 
 /**
- * Servlet implementation class TaskConfirmServlet
+ * タスク編集確認サーブレット
+ * @author 桑原嵩
  */
 @WebServlet("/task-alter-confirm-servlet")
 public class TaskAlterConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
-     * @see HttpServlet#HttpServlet()
+     * コンストラクタ
      */
     public TaskAlterConfirmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+	 * GETリクエストを処理し、編集したいタスクの情報を送ります。
+	 *
+	 * @param request  HTTPリクエスト
+	 * @param response HTTPレスポンス
+	 * @throws ServletException サーブレット例外
+	 * @throws IOException      入出力例外
 	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		//タスクIDの取得
@@ -49,7 +55,7 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 
 		try {
 			//タスクの詳細情報を取得
-			TaskCategoryStatusBean task = updateDAO.taskDetail(taskId);
+			TaskCategoryStatusForm task = updateDAO.taskDetail(taskId);
 			//カテゴリーとステータスの詳細情報を取得
 			List<CategoryBean> categoryList = registerDAO.selectCategory();
 			List<StatusBean> statusList = registerDAO.selectStatus();
@@ -71,15 +77,21 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * POSTリクエストを処理し、入力された編集内容を取得します。
+	 *
+	 * @param request  HTTPリクエスト
+	 * @param response HTTPレスポンス
+	 * @throws ServletException サーブレット例外
+	 * @throws IOException      入出力例外
 	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//編集内容の取得
+		//JSPに入力された編集内容の取得
 		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
-		TaskCategoryStatusBean task = (TaskCategoryStatusBean) session.getAttribute("task");
+		TaskCategoryStatusForm task = (TaskCategoryStatusForm) session.getAttribute("task");
 
 		int taskId = task.getTaskId();
 		String taskName = request.getParameter("taskName");
@@ -98,7 +110,7 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 
 		String memo = request.getParameter("memo");
 
-		// JSPから受け取ったパラメータをFormでインスタンス化したtcsf変数に格納する
+		//編集内容をインスタンス化したForm型のtcsf変数に格納する
         TaskCategoryStatusForm tcsf = new TaskCategoryStatusForm();
         tcsf.setTaskId(taskId);
         tcsf.setTaskName(taskName);
@@ -109,7 +121,7 @@ public class TaskAlterConfirmServlet extends HttpServlet {
         tcsf.setCategoryName(categoryName);
         tcsf.setStatusName(statusName);
 
-        // セッション属性設定
+        //編集内容をセッションスコープに格納
         session.setAttribute("tcsf", tcsf);
 
 		// リクエストの転送
