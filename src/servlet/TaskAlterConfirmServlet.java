@@ -54,13 +54,13 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 		TaskRegisterDAO registerDAO = new TaskRegisterDAO();
 
 		try {
-			//タスクの詳細情報を取得
+			//タスクの詳細情報が入ったFormを取得
 			TaskCategoryStatusForm task = updateDAO.taskDetail(taskId);
-			//カテゴリーとステータスの詳細情報を取得
+			//カテゴリー名とステータス名のListを取得
 			List<CategoryBean> categoryList = registerDAO.selectCategory();
 			List<StatusBean> statusList = registerDAO.selectStatus();
 
-			//取得した情報をセッションスコープに格納
+			//取得したFormとListをセッションスコープに格納
 			HttpSession session = request.getSession();
 			session.setAttribute("task", task);
 			session.setAttribute("categoryList", categoryList);
@@ -87,13 +87,14 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//編集するタスクのタスクIDをセッションスコープから取得
+		HttpSession session = request.getSession();
+		TaskCategoryStatusForm task = (TaskCategoryStatusForm) session.getAttribute("task");
+		int taskId = task.getTaskId();
+
 		//JSPに入力された編集内容の取得
 		request.setCharacterEncoding("UTF-8");
 
-		HttpSession session = request.getSession();
-		TaskCategoryStatusForm task = (TaskCategoryStatusForm) session.getAttribute("task");
-
-		int taskId = task.getTaskId();
 		String taskName = request.getParameter("taskName");
 
 		String category = request.getParameter("category");
@@ -110,7 +111,7 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 
 		String memo = request.getParameter("memo");
 
-		//編集内容をインスタンス化したForm型のtcsf変数に格納する
+		//編集内容を、インスタンス化したForm型のtcsf変数に格納する
         TaskCategoryStatusForm tcsf = new TaskCategoryStatusForm();
         tcsf.setTaskId(taskId);
         tcsf.setTaskName(taskName);
