@@ -38,7 +38,8 @@ public class TaskShowDAO {
 				"	INNER JOIN task_db.m_status t4\r\n" +
 				"		ON t1.status_code = t4.status_code\r\n" +
 				"WHERE\r\n" +
-				"	t1.user_id = ?;";
+				"	t1.user_id = ?\r\n" +
+				"ORDER BY task_id;";
 
 		// データベースへの接続の取得、Statementの取得、SQLステートメントの実行
 		try (Connection con = ConnectionManager.getConnection();
