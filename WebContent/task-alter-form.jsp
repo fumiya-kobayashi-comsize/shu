@@ -22,7 +22,7 @@
 		<tr>
 			<th>タスク名</th>
 			<td>
-				<input type="text" name="taskName" value="<%=task.getTaskName() %>">
+				<input type="text" name="taskName" value="<%=task.getTaskName() %>" maxlength="50">
 			</td>
 		</tr>
 		<tr>
@@ -77,7 +77,7 @@
 		</tr>
 		<tr>
 			<th>メモ</th>
-			<td><input type="text" value="<%=task.getMemo() %>" name="memo"></td>
+			<td><input type="text" value="<%=task.getMemo() %>" name="memo" maxlength="100"></td>
 		</tr>
 		<tr class="table-button">
 			<td colspan="2"><input type="submit" value="変更する"></td>
