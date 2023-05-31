@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 
 import model.entity.TaskCategoryStatusBean;
 
@@ -20,7 +19,7 @@ public class TaskUpdateDAO {
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);) {
 
-			//Beanから編集内容の取得
+			//引数で与えられたBeanから編集内容の取得
 			pstmt.setString(1, tcs.getTaskName());
 			pstmt.setInt(2, tcs.getCategoryId());
 			pstmt.setDate(3, tcs.getLimitDate());

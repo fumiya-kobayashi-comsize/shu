@@ -17,6 +17,7 @@ import model.dao.TaskUpdateDAO;
 import model.entity.CategoryBean;
 import model.entity.StatusBean;
 import model.entity.TaskCategoryStatusBean;
+import model.form.TaskCategoryStatusForm;
 
 /**
  * Servlet implementation class TaskConfirmServlet
@@ -77,6 +78,10 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 		//編集内容の取得
 		request.setCharacterEncoding("UTF-8");
 
+		HttpSession session = request.getSession();
+		TaskCategoryStatusBean task = (TaskCategoryStatusBean) session.getAttribute("task");
+
+		int taskId = task.getTaskId();
 		String taskName = request.getParameter("taskName");
 
 		String category = request.getParameter("category");
@@ -84,7 +89,7 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 		int categoryId = Integer.parseInt(splitCategory[0]);
 		String categoryName = splitCategory[1];
 
-		String limitDate = request.getParameter("limitDate");
+		String limitDateStr = request.getParameter("limitDate");
 
 		String status = request.getParameter("status");
 		String[] splitStatus = status.split(",");
@@ -93,14 +98,19 @@ public class TaskAlterConfirmServlet extends HttpServlet {
 
 		String memo = request.getParameter("memo");
 
-		//取得した編集内容をリクエストスコープに格納
-		request.setAttribute("taskName", taskName);
-		request.setAttribute("categoryId", categoryId);
-		request.setAttribute("limitDate", limitDate);
-		request.setAttribute("statusCode", statusCode);
-		request.setAttribute("memo", memo);
-		request.setAttribute("categoryName", categoryName);
-		request.setAttribute("statusName", statusName);
+		// JSPから受け取ったパラメータをFormでインスタンス化したtcsf変数に格納する
+        TaskCategoryStatusForm tcsf = new TaskCategoryStatusForm();
+        tcsf.setTaskId(taskId);
+        tcsf.setTaskName(taskName);
+        tcsf.setCategoryId(categoryId);
+        tcsf.setLimitDateStr(limitDateStr);
+        tcsf.setStatusCode(statusCode);
+        tcsf.setMemo(memo);
+        tcsf.setCategoryName(categoryName);
+        tcsf.setStatusName(statusName);
+
+        // セッション属性設定
+        session.setAttribute("tcsf", tcsf);
 
 		// リクエストの転送
 		RequestDispatcher rd = request.getRequestDispatcher("task-alter-confirm.jsp");
