@@ -36,21 +36,45 @@
 
 				<th>カテゴリ情報:</th>
 				<td><select name="category">
-						<% for (CategoryBean categoryId : categoryList) { %>
-						<% if (tcsf.getCategoryId() != categoryId.getCategoryId()) { %>
+						<%
+							if (tcsf == null) {
+						%>
+						<%
+							for (CategoryBean category : categoryList) {
+						%>
 						<option
-							value="<%= categoryId.getCategoryId() %>,<%= categoryId.getCategoryName() %>">
-							<%= categoryId.getCategoryName() %>
+							value="<%=category.getCategoryId()%>,<%=category.getCategoryName()%>">
+							<%=category.getCategoryName()%>
 						</option>
-						<% } else { %>
-						<% for (CategoryBean category : categoryList) { %>
+						<%
+							}
+						%>
+						<%
+							} else {
+						%>
 						<option
-							value="<%= category.getCategoryId() %>,<%= category.getCategoryName() %>">
-							<%= category.getCategoryName() %>
+							value="<%=tcsf.getCategoryId()%>,<%=tcsf.getCategoryName()%>">
+							<%=tcsf.getCategoryName()%>
 						</option>
-						<% } %>
-						<% } %>
-						<% } %>
+						<%
+							for (CategoryBean category : categoryList) {
+						%>
+						<%
+							if (category.getCategoryId() != tcsf.getCategoryId()) {
+						%>
+						<option
+							value="<%=category.getCategoryId()%>,<%=category.getCategoryName()%>">
+							<%=category.getCategoryName()%>
+						</option>
+						<%
+							}
+						%>
+						<%
+							}
+						%>
+						<%
+							}
+						%>
 				</select></td>
 
 			</tr>
@@ -80,16 +104,46 @@
 				<th>ステータス情報:</th>
 				<td><select name="status">
 						<%
-
-
+							if (tcsf == null) {
+						%>
+						<%
 							for (StatusBean status : statusList) {
 						%>
 						<option
-							value="<%=status.getStatusCode()%>,<%=status.getStatusName()%>"><%=status.getStatusName()%></option>
+							value="<%=status.getStatusCode()%>,<%=status.getStatusName()%>">
+							<%=status.getStatusName()%>
+						</option>
+						<%
+							}
+						%>
+						<%
+							} else {
+						%>
+						<option
+							value="<%=tcsf.getStatusCode()%>,<%=tcsf.getStatusName()%>">
+							<%=tcsf.getStatusName()%>
+						</option>
+						<%
+						for (StatusBean status : statusList) {
+						%>
+						<%
+							if (status.getStatusCode() != tcsf.getStatusCode()) {
+						%>
+						<option
+							value="<%=status.getStatusCode()%>,<%=status.getStatusName()%>">
+							<%=status.getStatusName()%>
+						</option>
+						<%
+							}
+						%>
+						<%
+							}
+						%>
 						<%
 							}
 						%>
 				</select></td>
+
 			</tr>
 
 			<tr>
