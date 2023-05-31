@@ -13,14 +13,41 @@ public class TaskCategoryStatusBean {
 
 	/* テーブル t_task、m_category、m_status のBean */
 
+	/**
+	 * タスクID
+	 */
 	private int taskId;
+	/**
+	 * タスク名
+	 */
 	private String taskName;
+	/**
+	 * カテゴリID
+	 */
 	private int categoryId;
+	/**
+	 * 期限
+	 */
 	private Date limitDate;
+	/**
+	 * ユーザID
+	 */
 	private String userId;
+	/**
+	 * ステータスコード
+	 */
 	private String statusCode;
+	/**
+	 * メモ
+	 */
 	private String memo;
+	/**
+	 * カテゴリ名
+	 */
 	private String categoryName;
+	/**
+     * ステータス名
+     */
 	private String statusName;
 
 	/**
