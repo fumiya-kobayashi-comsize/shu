@@ -88,6 +88,10 @@
 		<input type="submit" value="タスク登録確認へ">
 
 	</form>
+	<form action = "menu.jsp" method = "POST">
+	<input type = "submit" value = "メニュー画面へ">
+	</form>
+
 
 </body>
 </html>
