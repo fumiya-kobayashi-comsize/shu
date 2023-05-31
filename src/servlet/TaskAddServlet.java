@@ -88,14 +88,22 @@ public class TaskAddServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		TaskCategoryStatusForm tcsf = (TaskCategoryStatusForm)session.getAttribute("tcsf");
 		TaskCategoryStatusBean tcsb = null;
+
 		try {
 			tcsb = tcsf.toEntity();
+
 		} catch (IllegalArgumentException e) {
 			doInsert = false;
 		}
+
+
 		// DAOをインスタンス化
 		TaskRegisterDAO dao = new TaskRegisterDAO();
 
+		// もしタスクネームが空文字だったらFALSEに
+		if("".equals(tcsf.getTaskName())) {
+			doInsert = false;
+		}
 		try {
 			// booleanがtrueだったら
 			if (doInsert) {
