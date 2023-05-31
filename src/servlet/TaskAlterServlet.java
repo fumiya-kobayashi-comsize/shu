@@ -61,7 +61,7 @@ public class TaskAlterServlet extends HttpServlet {
 		//isEditedメソッドで編集の有無を判定する
 		doUpdate = isEdited(tcsf, task);
 
-		//Bean型の変数を宣言
+		//Update処理に使用するBean型の変数を宣言
 		TaskCategoryStatusBean tcsb = null;
 
 		//toEntityメソッドで期限をDate型に変更し、Beanに格納する
