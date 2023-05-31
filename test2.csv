@@ -1,0 +1,2 @@
+user_id,task_id,task_name,category_id,category_name,limit_date,status_code,status_name,memo
+admin,9,タスク２,2,既存商品B：改良プロジェクト,3000-09-08,50,着手,タスク2メモ
