@@ -75,15 +75,16 @@ public class TaskDeleteDAO {
 		}
 	}
 
+	/**
+	 * 指定されたタスクIDのタスク情報を削除して処理件数を返します。
+	 * @param taskId タスクID
+	 * @return 削除処理件数
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+
 	//task_idに対応したt_taskのテーブルを削除するDAO（タスク削除用）
 	public int deleteTask(int taskId) throws SQLException, ClassNotFoundException {
-		/**
-		 * 指定されたタスクIDのタスク情報を削除して処理件数を返します。
-		 * @param taskId タスクID
-		 * @return 削除処理件数
-		 * @throws SQLException
-		 * @throws ClassNotFoundException
-		 */
 
 		String sql = "DELETE FROM task_db.t_task WHERE task_id = ?";
 		int processingNumber = 0; //処理件数

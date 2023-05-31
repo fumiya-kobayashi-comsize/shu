@@ -28,45 +28,29 @@
 			for (TaskCategoryStatusBean task : taskList) {
 		%>
 		<tr>
-			<td>
-				<%=task.getTaskName()%>
-			</td>
-			<td>
-				<%=task.getCategoryName()%>
-			</td>
-			<td>
-				<%=task.getLimitDate()%>
-			</td>
-			<td>
-				<%=request.getAttribute("userName") %>
-			</td>
-			<td>
-				<%=task.getStatusName()%>
-			</td>
-			<td>
-				<%=task.getMemo()%>
-			</td>
-			<td>
-				<form action="task-alter-confirm-servlet" method="GET">
+			<td><%=task.getTaskName()%></td>
+			<td><%=task.getCategoryName()%></td>
+			<td><%=task.getLimitDate()%></td>
+			<td><%=request.getAttribute("userName") %></td>
+			<td><%=task.getStatusName()%></td>
+			<td><%=task.getMemo()%></td>
+
+			<td><form action="task-alter-confirm-servlet" method="GET">
 					<input type="submit" value="変更">
 					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">
 					<input type="hidden" name="category" value="<%=task.getCategoryId()%>, <%=task.getCategoryName()%>">
 					<input type="hidden" name="status" value="<%=task.getStatusCode()%>, <%=task.getStatusName()%>">
 
-				</form>
-			</td>
-			<td>
-				<form action="task-delete-confirm-servlet" method="GET">
+				</form></td>
+			<td><form action="task-delete-confirm-servlet" method="GET">
 					<input type="submit" value="削除確認">
 					<input type="hidden" name="taskId" value="<%=task.getTaskId()%>">
-				</form>
-			</td>
+				</form></td>
 		</tr>
 		<%
 			}
 		%>
 	</table>
-
 	<br>
 	<div>
 		<form action="menu.jsp" method="POST">

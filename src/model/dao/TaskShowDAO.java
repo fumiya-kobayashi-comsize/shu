@@ -10,9 +10,22 @@ import java.util.List;
 
 import model.entity.TaskCategoryStatusBean;
 
-//担当者ごとのタスク一覧を表示するDAO
+/**
+ * 一覧表示機能に関連したDAOです。
+ * @author 板谷寛希
+ */
+
+
 public class TaskShowDAO {
 
+	/**
+	 * 指定されたユーザIDからタスクの情報を検索して返します。
+	 * @param userId ユーザID
+	 * @return ユーザIDに対応したタスク情報
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	//担当者ごとのタスク一覧を表示するDAO
 	public List<TaskCategoryStatusBean> selectAll(String userId) throws ClassNotFoundException, SQLException {
 
 		List<TaskCategoryStatusBean> taskList = new ArrayList<TaskCategoryStatusBean>();
