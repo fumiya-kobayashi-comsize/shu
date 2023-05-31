@@ -44,27 +44,15 @@
         for (TaskCategoryStatusBean taskselect : taskSelect) {
     %>
 		<tr>
-			<td>
-				<%=taskselect.getTaskName()%>
-			</td>
-			<td>
-				<%=taskselect.getCategoryName()%>
-			</td>
-			<td>
-				<%=taskselect.getLimitDate()%>
-			</td>
-			<td>
-				<%=user.getUserName() %>
-			</td>
-			<td>
-				<%=taskselect.getStatusName()%>
-			</td>
-			<td>
-				<%=taskselect.getMemo()%>
-			</td>
+			<td><%=taskselect.getTaskName()%></td>
+			<td><%=taskselect.getCategoryName()%></td>
+			<td><%=taskselect.getLimitDate()%></td>
+			<td><%=user.getUserName() %></td>
+			<td><%=taskselect.getStatusName()%></td>
+			<td><%=taskselect.getMemo()%></td>
 		</tr>
-			<% }
-			%>
+	<%	}
+	%>
 	</table>
 
 	<!-- 	タスク一覧表示画面へ戻る -->

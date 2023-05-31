@@ -10,7 +10,6 @@ import java.util.List;
 
 import model.entity.TaskCategoryStatusBean;
 
-
 //担当者ごとのタスク一覧を表示するDAO
 public class TaskShowDAO {
 
@@ -39,10 +38,9 @@ public class TaskShowDAO {
 
 			// 結果の操作
 			while (res.next()) {
-
 				TaskCategoryStatusBean task = new TaskCategoryStatusBean();
 
-
+				//タスク詳細のget
 				int taskId = res.getInt("task_id");
 				String taskName = res.getString("task_name");
 				int categoryId = res.getInt("category_id");
@@ -52,6 +50,7 @@ public class TaskShowDAO {
 				String statusName = res.getString("status_name");
 				String memo = res.getString("memo");
 
+				//taskにset
 				task.setTaskId(taskId);
 				task.setTaskName(taskName);
 				task.setCategoryId(categoryId);

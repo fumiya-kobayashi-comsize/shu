@@ -16,7 +16,8 @@ import model.dao.TaskDeleteDAO;
 import model.entity.TaskCategoryStatusBean;
 
 /**
- * Servlet implementation class ItemDetailServlet
+ * 一覧画面から個別のタスクIDを受け取り、対応したタスク表示のための処理をする。
+ * @author 板谷寛希
  */
 @WebServlet("/task-delete-confirm-servlet")
 public class TaskDeleteConfirmServlet extends HttpServlet {

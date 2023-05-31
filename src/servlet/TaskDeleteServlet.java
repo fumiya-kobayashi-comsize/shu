@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.TaskDeleteDAO;
 
 /**
- * Servlet implementation class ItemDeleteServlet
+ * 一覧画面からタスクIDを受け取り、削除のための処理をする。
+ * @author 板谷寛希
  */
 @WebServlet("/task-delete-servlet")
 public class TaskDeleteServlet extends HttpServlet {
@@ -41,14 +42,18 @@ public class TaskDeleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		// リクエストのエンコーディング方式を指定
 		request.setCharacterEncoding("UTF-8");
+
 		//セッションからtask_idを、int型taskIdで受け取る。
 		int taskId = Integer.parseInt(request.getParameter("taskId"));
-
+		//処理件数
+		int processingNumber = 0;
 		//DAOの利用
 		TaskDeleteDAO dao = new TaskDeleteDAO();
-		int processingNumber = 0; //処理件数
+
+
 		try {
 			//DAOの利用、処理件数のカウント
 			processingNumber = dao.deleteTask(taskId);
