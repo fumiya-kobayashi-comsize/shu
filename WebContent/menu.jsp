@@ -7,6 +7,7 @@
 <title>メニュー</title>
 </head>
 <body>
+<%session.removeAttribute("tcsf"); %>
 	<h1>メニュー</h1>
 	<hr>
 	<form action="task-add-servlet" method="GET">
