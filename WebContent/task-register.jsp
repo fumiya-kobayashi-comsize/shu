@@ -24,7 +24,7 @@
 		<table>
 			<tr>
 				<th>タスク名:</th>
-				<td><input type="text" name="taskName"></td>
+				<td><input type="text" name="taskName" maxlength = "50"></td>
 			</tr>
 
 
@@ -46,7 +46,7 @@
 			<tr>
 				<th>期限:</th>
 				<td><input type="text" name="limitDate"
-					placeholder="YYYY-MM-DD"></td>
+					placeholder="YYYY-MM-DD" maxlength = "10"></td>
 			</tr>
 
 			<%
@@ -79,7 +79,7 @@
 
 			<tr>
 				<th>メモ:</th>
-				<td><input type="text" name="memo"></td>
+				<td><input type="text" name="memo" maxlength = "100"></td>
 			</tr>
 
 
