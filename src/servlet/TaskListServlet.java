@@ -18,7 +18,8 @@ import model.entity.UserBean;
 
 
 /**
- * Servlet implementation class ItemServlet
+ * ユーザーIDに応じたタスク一覧画面表示のための処理をする。
+ * @author 板谷寛希
  */
 @WebServlet("/task-list-servlet")
 public class TaskListServlet extends HttpServlet {
