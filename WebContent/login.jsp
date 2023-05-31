@@ -15,20 +15,16 @@
 		<table>
 			<tr>
 				<th>ユーザID</th>
-				<td><input type="text" name="user_id" maxlength="24" required>
-				<td>
+				<td><input type="text" name="user_id" maxlength="24" required></td>
 			</tr>
 			<tr>
 				<th>パスワード</th>
-				<td><input type="password" name="password" maxlength="32" required>
-				<td><br>
+				<td><input type="password" name="password" maxlength="32"required></td>
 			</tr>
 		</table>
-		<br>
 		<input type="submit" value="ログイン">
 		<input type="reset" value="取消">
 	</form>
-	<br>
 	<form action="user-register.jsp" method="POST">
 		<input type="submit" value="新規登録">
 	</form>

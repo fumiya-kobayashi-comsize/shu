@@ -12,13 +12,13 @@ function checkPasswordMatch() {
 }
 
 function resetForm() {
-	  var form = document.getElementById("userForm");
+	var form = document.getElementById("userForm");
 
-	  // 入力フィールドの値を空にする
-	  var inputs = form.getElementsByTagName("input");
-	  for (var i = 0; i < inputs.length; i++) {
-	    if (inputs[i].type !== "submit" && inputs[i].type !== "reset") {
-	      inputs[i].value = "";
-	    }
-	  }
+	// 入力フィールドの値を空にする
+	var inputs = form.getElementsByTagName("input");
+	for (var i = 0; i < inputs.length; i++) {
+		if (inputs[i].type !== "submit" && inputs[i].type !== "reset") {
+			inputs[i].value = "";
+		}
 	}
+}

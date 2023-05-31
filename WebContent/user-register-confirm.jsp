@@ -15,7 +15,7 @@
 		<table>
 			<tr>
 				<th>ユーザID</th>
-				<td><%=user.getUserId() %></td>
+				<td><%=user.getUserId()%></td>
 			</tr>
 			<tr>
 				<th>パスワード</th>
@@ -32,12 +32,11 @@
 			</tr>
 			<tr>
 				<th>ユーザ名</th>
-				<td><%=user.getUserName() %></td>
+				<td><%=user.getUserName()%></td>
 			</tr>
 		</table>
-		<br> <input type="submit" value="登録する">
+		<input type="submit" value="登録する">
 	</form>
-	<br>
 	<form action="user-register.jsp" method="POST">
 		<input type="submit" value="戻る">
 	</form>

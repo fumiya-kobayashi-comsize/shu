@@ -40,10 +40,9 @@
 
 		<p id="passwordMatchMessage" style="color: red;"></p>
 
-		<input type="submit" value="登録確認" id="submitBtn" onclick="disabled = true;">
+		<input type="submit" value="登録確認" id="submitBtn">
 		<input type="reset" value="取消" onclick="resetForm(); return false;">
 	</form>
-	<br>
 	<form action="login.jsp" method="POST">
 		<input type="submit" value="ログイン画面へ">
 	</form>
