@@ -20,7 +20,7 @@
 			</tr>
 			<tr>
 				<th>パスワード</th>
-				<td><input type="password" name="password" required>
+				<td><input type="password" name="password" maxlength="32" required>
 				<td><br>
 			</tr>
 		</table>

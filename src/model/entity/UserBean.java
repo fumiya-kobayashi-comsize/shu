@@ -2,7 +2,7 @@ package model.entity;
 
 /**
  * ユーザの情報を表します。
- * m_userのDTOであり、Beanオブジェクトです。
+ * m_userのEntityクラスであり、Beanオブジェクトです。
  * @author 櫻井藍子
  */
 public class UserBean {
